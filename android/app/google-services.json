@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "42683465449",
+    "project_id": "navi-product-management",
+    "storage_bucket": "navi-product-management.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42683465449:android:e9d012313ed3562d3f3a78",
+        "android_client_info": {
+          "package_name": "com.example.navi_product_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "42683465449-ef41ua5lge6q2i9niom1tirhcvl43h6h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsrNt4FcstVY_KR6ylsQYleqatMtWf9ZY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "42683465449-ef41ua5lge6q2i9niom1tirhcvl43h6h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
