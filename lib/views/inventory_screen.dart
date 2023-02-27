@@ -3,6 +3,8 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
 import 'package:navi_product_management/models/product_model.dart';
 import 'package:navi_product_management/views/add_product_screen.dart';
+import 'package:simple_barcode_scanner/enum.dart';
+import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
 import 'package:navi_product_management/views/widgets/product_list_item.dart';
 
@@ -50,14 +52,11 @@ class InventoryScreen extends StatelessWidget {
   }
 
   Future<void> scanBarcode() async {
-    final String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-      "#ff6666",
-      "Cancel",
-      false,
-      ScanMode.BARCODE,
-    );
+    final String barcodeScanRes = await Get.to(() => SimpleBarcodeScannerPage(
+          scanType: ScanType.barcode,
+        ));
 
-    if (barcodeScanRes == '-1') {
+    if (barcodeScanRes is int) {
       // User canceled scanning
       return;
     }
