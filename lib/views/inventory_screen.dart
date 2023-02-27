@@ -7,6 +7,7 @@ import 'package:simple_barcode_scanner/enum.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
 import 'package:navi_product_management/views/widgets/product_list_item.dart';
+import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
 import '../controllers/inventory_controller.dart';
 
@@ -52,12 +53,19 @@ class InventoryScreen extends StatelessWidget {
   }
 
   Future<void> scanBarcode() async {
+<<<<<<< HEAD
     final String barcodeScanRes = await Get.to(() => SimpleBarcodeScannerPage(
           scanType: ScanType.barcode,
         ));
 
     if (barcodeScanRes is int) {
       // User canceled scanning
+=======
+    final String barcodeScanRes =
+        await Get.to(() => SimpleBarcodeScannerPage());
+
+    if (barcodeScanRes == "-1") {
+>>>>>>> 17f28ba8bf72461ca29e3fbe11f4dd603964d5b0
       return;
     }
 

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -50,17 +51,11 @@ class ProductListItem extends StatelessWidget {
         child: ListTile(
           leading: CachedNetworkImage(
             imageUrl: product.imageUrl,
-            imageBuilder: (context, imageProvider) => Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                    colorFilter:
-                        ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
-              ),
-            ),
             placeholder: (context, url) => CircularProgressIndicator(),
             errorWidget: (context, url, error) => Icon(Icons.error),
+            width: 75, // set the width and height to the same value
+            height: 100,
+            fit: BoxFit.cover,
           ),
           title: Text(
             product.name,
