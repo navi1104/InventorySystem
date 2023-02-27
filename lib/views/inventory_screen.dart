@@ -53,19 +53,10 @@ class InventoryScreen extends StatelessWidget {
   }
 
   Future<void> scanBarcode() async {
-<<<<<<< HEAD
-    final String barcodeScanRes = await Get.to(() => SimpleBarcodeScannerPage(
-          scanType: ScanType.barcode,
-        ));
-
-    if (barcodeScanRes is int) {
-      // User canceled scanning
-=======
     final String barcodeScanRes =
         await Get.to(() => SimpleBarcodeScannerPage());
 
     if (barcodeScanRes == "-1") {
->>>>>>> 17f28ba8bf72461ca29e3fbe11f4dd603964d5b0
       return;
     }
 
