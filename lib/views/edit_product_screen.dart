@@ -28,6 +28,7 @@ class EditProductScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit Product'),
+        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

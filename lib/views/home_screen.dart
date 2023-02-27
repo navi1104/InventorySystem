@@ -18,6 +18,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Product Catalog'),
+        elevation: 0,
         actions: [
           IconButton(
             icon: Icon(Icons.logout),

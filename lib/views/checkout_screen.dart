@@ -9,7 +9,10 @@ class CheckoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Product Check out")),
+      appBar: AppBar(
+        title: Text("Product Check out"),
+        elevation: 0,
+      ),
       drawer: AppDrawer(),
       body: Center(
           child: TextButton(

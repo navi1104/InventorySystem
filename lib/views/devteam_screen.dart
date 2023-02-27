@@ -8,6 +8,12 @@ class DevTeamScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text("DevScreen")),drawer: AppDrawer(),);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("DevScreen"),
+        elevation: 0,
+      ),
+      drawer: AppDrawer(),
+    );
   }
 }

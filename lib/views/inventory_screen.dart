@@ -3,6 +3,7 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
 import 'package:navi_product_management/models/product_model.dart';
 import 'package:navi_product_management/views/add_product_screen.dart';
+import 'package:navi_product_management/views/widgets/app_drawer.dart';
 import 'package:simple_barcode_scanner/enum.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
@@ -18,7 +19,9 @@ class InventoryScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Inventory'),
+        elevation: 0,
       ),
+      drawer: AppDrawer(),
       body: Obx(() {
         if (inventoryController.products.isEmpty) {
           return Center(
