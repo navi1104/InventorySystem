@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:navi_product_management/models/product_model.dart';
 import 'package:navi_product_management/views/add_product_screen.dart';
 import 'package:navi_product_management/views/widgets/app_drawer.dart';
+import 'package:navi_product_management/views/widgets/barcode_entry_dialogue.dart';
 import 'package:simple_barcode_scanner/enum.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
@@ -49,7 +50,18 @@ class InventoryScreen extends StatelessWidget {
         }
       }),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async => await scanBarcode(),
+        onPressed: () async => {
+          if (Theme.of(context).platform == TargetPlatform.android)
+            {await scanBarcode()}
+          else
+            {
+              await showDialog<String>(
+                  context: context,
+                  builder: (context) {
+                    return BarcodeEntryDialog();
+                  })
+            }
+        },
         child: Icon(Icons.add),
       ),
     );

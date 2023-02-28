@@ -25,7 +25,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController _descriptionController = TextEditingController();
 
   final ImagePicker _picker = ImagePicker();
-  late File _imageFile = File("");
+  late File _imageFile = File(null.toString());
   bool _uploadingImage = false;
   late final pickedFile;
   Future<void> _getImage() async {
@@ -38,6 +38,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     }
   }
 
+  bool clickAdd = false;
   Future<void> _uploadImage() async {
     setState(() {
       _uploadingImage = true;
@@ -70,7 +71,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     final form = _formKey.currentState;
     if (form != null && form.validate()) {
       form.save();
-       await inventoryController.addNewProduct(Product(
+      await inventoryController.addNewProduct(Product(
           barcode: widget.barcode,
           name: _nameController.text,
           price: double.parse(_priceController.text),
@@ -98,11 +99,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 Center(
                   child: _uploadingImage
                       ? const CircularProgressIndicator()
-                      : _imageFile != null
+                      : _imageFile.path != "null"
                           ? Image.file(_imageFile)
-                          : const Icon(
+                          : Icon(
                               Icons.image,
-                              size: 80,
+                              size: 30,
                             ),
                 ),
                 const SizedBox(height: 16),
@@ -112,11 +113,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ElevatedButton(
                       onPressed: _getImage,
                       child: const Text('Select Image'),
-                    ),
-                    const SizedBox(width: 16),
-                    ElevatedButton(
-                      onPressed: _uploadingImage ? null : _uploadImage,
-                      child: const Text('Upload Image'),
                     ),
                   ],
                 ),
@@ -161,8 +157,28 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 const SizedBox(height: 16),
                 Center(
                   child: ElevatedButton(
-                    onPressed: _uploadingImage ? null : () => _uploadImage(),
-                    child: const Text('Add Product'),
+                    // onPressed: _uploadingImage ? null : () => _uploadImage(),
+                    onPressed: (() async {
+                      if (_imageFile.path == "null" ||
+                          _descriptionController.text == "" ||
+                          _nameController.text == "") {
+                        Get.snackbar("Error", "Please enter all details",
+                            backgroundColor: Colors.red,
+                            colorText: Colors.white);
+                      } else {
+                        setState(() {
+                          clickAdd = true;
+                        });
+                        await _uploadImage();
+                      }
+                    }),
+                    child: clickAdd
+                        ? Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child:
+                                CircularProgressIndicator(color: Colors.white),
+                          )
+                        : Text('Add Product'),
                   ),
                 ),
               ],

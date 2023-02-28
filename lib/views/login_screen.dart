@@ -23,7 +23,7 @@ class LoginScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Container(
-            width: MediaQuery.of(context).size.width / 2,
+            width: MediaQuery.of(context).size.width / 1.4,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
