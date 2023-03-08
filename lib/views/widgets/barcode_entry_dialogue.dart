@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:navi_product_management/controllers/inventory_controller.dart';
+import 'package:navi_product_management/views/add_product_screen.dart';
 
 class BarcodeEntryDialog extends StatefulWidget {
   @override
@@ -8,7 +9,6 @@ class BarcodeEntryDialog extends StatefulWidget {
 }
 
 class _BarcodeEntryDialogState extends State<BarcodeEntryDialog> {
-  final _formKey = GlobalKey<FormState>();
   final InventoryController _inventoryController = Get.find();
   TextEditingController barcodeController = TextEditingController();
 
@@ -19,7 +19,6 @@ class _BarcodeEntryDialogState extends State<BarcodeEntryDialog> {
       content: Form(
         child: TextFormField(
           controller: barcodeController,
-          key: _formKey,
           validator: (value) {
             if (value!.isEmpty) {
               return 'Please enter a barcode';
@@ -41,9 +40,10 @@ class _BarcodeEntryDialogState extends State<BarcodeEntryDialog> {
         MaterialButton(
           child: Text('OK'),
           onPressed: () {
-            if (_formKey.currentState!.validate()) {
+            if (true) {
               _inventoryController.addProduct(barcodeController.text);
-              Navigator.of(context).pop();
+
+              Get.to(() => AddProductScreen(barcode: barcodeController.text));
             }
           },
         ),

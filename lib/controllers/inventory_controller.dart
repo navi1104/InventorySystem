@@ -32,6 +32,7 @@ class InventoryController extends GetxController {
   }
 
   Future<void> addProduct(String barcode) async {
+    print(barcode + " from controller");
     final existingProductIndex =
         products.indexWhere((p) => p.barcode == barcode);
     if (existingProductIndex != -1) {
@@ -45,8 +46,12 @@ class InventoryController extends GetxController {
   }
 
   Future<void> addNewProduct(Product product) async {
-    await inventoryRef.doc(product.barcode).set(product.toJson());
-    products.add(product);
+    try {
+      await inventoryRef.doc(product.barcode).set(product.toJson());
+      products.add(product);
+    } catch (err) {
+      Get.snackbar("Error", err.toString());
+    }
   }
 
   Future<void> updateProduct(Product product) async {
