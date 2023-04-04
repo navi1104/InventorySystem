@@ -22,17 +22,43 @@ class CatalogCard extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(product.name),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  product.name,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  '\u{20B9}${product.price.toString()}',
+                  style: TextStyle(
+                      color: Colors.green,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(product.price.toString()),
+            child: Text(
+              product.description,
+              style: TextStyle(
+                  color: Colors.blueGrey,
+                  fontSize: 25,
+                  fontWeight: FontWeight.w200),
+            ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(product.description),
+          SizedBox(
+            height: 20,
           ),
         ]),
       ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/auth_controller.dart';
-import '../checkout_screen.dart';
+
 import '../devteam_screen.dart';
 import '../home_screen.dart';
 import '../inventory_screen.dart';
@@ -39,13 +39,6 @@ class AppDrawer extends StatelessWidget {
             title: Text('Inventory/Check-in'),
             onTap: () {
               Get.to(() => InventoryScreen());
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.local_shipping),
-            title: Text('Check-out'),
-            onTap: () {
-              Get.to(() => CheckoutScreen());
             },
           ),
           ListTile(

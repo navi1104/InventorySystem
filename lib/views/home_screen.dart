@@ -49,9 +49,25 @@ class HomeScreen extends StatelessWidget {
           if (Theme.of(context).platform == TargetPlatform.android) {
             return ListView.builder(
               itemCount: _inventoryController.products.length,
-              itemBuilder: (context, index) {
+              itemBuilder: (BuildContext context, int index) {
                 final product = _inventoryController.products[index];
-                return CatalogCard(product: product);
+                return Card(
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.network(product.imageUrl),
+                      ),
+                      SizedBox(height: 8.0),
+                      Text(product.name),
+                      SizedBox(height: 8.0),
+                      Text(product.description),
+                      SizedBox(height: 8.0),
+                      Text('Price: \₹${product.price.toStringAsFixed(2)}'),
+                      SizedBox(height: 8.0),
+                    ],
+                  ),
+                );
               },
             );
           } else {

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:navi_product_management/views/add_product_screen.dart';
 
@@ -23,7 +24,7 @@ class InventoryController extends GetxController {
         .map((doc) => Product(
               name: doc['name'],
               barcode: doc['barcode'],
-              price: doc['price'],
+              price: doc['price'].toDouble(),
               count: doc['count'],
               imageUrl: doc['imageUrl'],
               description: doc['description'],
@@ -44,6 +45,47 @@ class InventoryController extends GetxController {
     } else {
       Get.to(() => AddProductScreen(barcode: barcode));
     }
+  }
+
+  Future<void> removeProductByBarcodeAndQuantity(String barcode) async {
+    Rx<int> quantity = 0.obs;
+    Get.dialog(
+      AlertDialog(
+        title: Text("Enter a number"),
+        content: TextField(
+          onChanged: (value) {
+            quantity.value = int.tryParse(value) ?? 0;
+          },
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+            labelText: "Quantity",
+            hintText: "Enter Quantity to checkout",
+          ),
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () async {
+              final existingProductIndex =
+                  products.indexWhere((p) => p.barcode == barcode);
+              if (existingProductIndex != -1) {
+                final existingProduct = products[existingProductIndex];
+                if (existingProduct.count <= quantity.value) {
+                  await removeProduct(existingProduct);
+                } else {
+                  final updatedProduct = existingProduct.copyWith(
+                      count: existingProduct.count - quantity.toInt());
+                  await updateProduct(updatedProduct);
+                }
+              } else {
+                Get.snackbar("Error", "Product not found");
+              }
+              Get.back();
+            },
+            child: Text("Ok"),
+          ),
+        ],
+      ),
+    );
   }
 
   Future<void> addNewProduct(Product product) async {

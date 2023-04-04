@@ -5,6 +5,7 @@ import 'package:navi_product_management/models/product_model.dart';
 import 'package:navi_product_management/views/add_product_screen.dart';
 import 'package:navi_product_management/views/widgets/app_drawer.dart';
 import 'package:navi_product_management/views/widgets/barcode_entry_dialogue.dart';
+import 'package:navi_product_management/views/widgets/checkout_dialog.dart';
 import 'package:simple_barcode_scanner/enum.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
@@ -40,29 +41,59 @@ class InventoryScreen extends StatelessWidget {
             ),
           );
         } else {
-          return ListView.builder(
-            itemCount: inventoryController.products.length,
-            itemBuilder: (context, index) {
-              final product = inventoryController.products[index];
-              return ProductListItem(product: product);
-            },
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ListView.builder(
+              itemCount: inventoryController.products.length,
+              itemBuilder: (context, index) {
+                final product = inventoryController.products[index];
+                return ProductListItem(product: product);
+              },
+            ),
           );
         }
       }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async => {
-          if (Theme.of(context).platform == TargetPlatform.android)
-            {await scanBarcode()}
-          else
-            {
-              await showDialog<String>(
-                  context: context,
-                  builder: (context) {
-                    return BarcodeEntryDialog();
-                  })
-            }
-        },
-        child: Icon(Icons.add),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () async => {
+              if (Theme.of(context).platform == TargetPlatform.android)
+                {await scanBarcode()}
+              else
+                {
+                  await showDialog<String>(
+                      context: context,
+                      builder: (context) {
+                        return BarcodeEntryDialog();
+                      })
+                }
+            },
+            child: Icon(
+              Icons.add,
+            ),
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          FloatingActionButton(
+            onPressed: () async => {
+              if (Theme.of(context).platform == TargetPlatform.android)
+                {await scanBarcodetoRemove()}
+              else
+                {
+                  await showDialog<String>(
+                      context: context,
+                      builder: (context) {
+                        return BarcodeExitDialog();
+                      })
+                }
+            },
+            child: Icon(
+              Icons.remove,
+            ),
+          )
+        ],
       ),
     );
   }
@@ -78,5 +109,18 @@ class InventoryScreen extends StatelessWidget {
     Get.snackbar('barcode', barcodeScanRes);
 
     await inventoryController.addProduct(barcodeScanRes);
+  }
+
+  Future<void> scanBarcodetoRemove() async {
+    final String barcodeScanRes =
+        await Get.to(() => SimpleBarcodeScannerPage());
+
+    if (barcodeScanRes == "-1") {
+      return;
+    }
+
+    Get.snackbar('barcode', barcodeScanRes);
+
+    await inventoryController.removeProductByBarcodeAndQuantity(barcodeScanRes);
   }
 }
