@@ -45,6 +45,20 @@
       <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
       <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
   </picture>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: 'AIzaSyBpCR2XX0bnTRsbCIwPbWStuGfHQlt0CLc',
+    authDomain: 'navi-product-management.firebaseapp.com',
+    projectId: 'navi-product-management',
+    storageBucket: 'navi-product-management.appspot.com',
+    messagingSenderId: '42683465449',
+    appId:'1:42683465449:web:6b4b9cf00cab402f3f3a78'
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
   <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js

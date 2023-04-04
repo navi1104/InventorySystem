@@ -71,14 +71,18 @@ class _AddProductScreenState extends State<AddProductScreen> {
     final form = _formKey.currentState;
     if (form != null && form.validate()) {
       form.save();
-      await inventoryController.addNewProduct(Product(
-          barcode: widget.barcode,
-          name: _nameController.text,
-          price: double.parse(_priceController.text),
-          count: 1,
-          description: _descriptionController.text,
-          imageUrl: imageUrl));
-      Navigator.of(context).pop();
+      try {
+        await inventoryController.addNewProduct(Product(
+            barcode: widget.barcode,
+            name: _nameController.text,
+            price: double.parse(_priceController.text),
+            count: 1,
+            description: _descriptionController.text,
+            imageUrl: imageUrl));
+        Navigator.of(context).pop();
+      } catch (err) {
+        Get.snackbar("Error", err.toString());
+      }
     }
   }
 
@@ -100,10 +104,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   child: _uploadingImage
                       ? const CircularProgressIndicator()
                       : _imageFile.path != "null"
-                          ? (Theme.of(context).platform ==
-                                  TargetPlatform.android
+                          ? Theme.of(context).platform == TargetPlatform.android
                               ? Image.file(_imageFile)
-                              : Image.network(_imageFile.path))
+                              : Image.network(_imageFile.path)
                           : Icon(
                               Icons.image,
                               size: 30,

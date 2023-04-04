@@ -9,7 +9,6 @@ class BarcodeEntryDialog extends StatefulWidget {
 }
 
 class _BarcodeEntryDialogState extends State<BarcodeEntryDialog> {
-  final _formKey = GlobalKey<FormState>();
   final InventoryController _inventoryController = Get.find();
   TextEditingController barcodeController = TextEditingController();
 
@@ -20,7 +19,6 @@ class _BarcodeEntryDialogState extends State<BarcodeEntryDialog> {
       content: Form(
         child: TextFormField(
           controller: barcodeController,
-          key: _formKey,
           validator: (value) {
             if (value!.isEmpty) {
               return 'Please enter a barcode';
