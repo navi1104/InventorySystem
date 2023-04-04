@@ -44,6 +44,7 @@ dependencies:
   image_cropper: ^3.0.1
   image_picker: ^0.8.6+3
   simple_barcode_scanner: ^0.0.8
+  url_launcher: ^6.1.10
 
 dev_dependencies:
   flutter_lints: ^2.0.0

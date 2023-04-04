@@ -100,7 +100,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   child: _uploadingImage
                       ? const CircularProgressIndicator()
                       : _imageFile.path != "null"
-                          ? Image.file(_imageFile)
+                          ? (Theme.of(context).platform ==
+                                  TargetPlatform.android
+                              ? Image.file(_imageFile)
+                              : Image.network(_imageFile.path))
                           : Icon(
                               Icons.image,
                               size: 30,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:navi_product_management/controllers/inventory_controller.dart';
+import 'package:navi_product_management/views/add_product_screen.dart';
 
 class BarcodeEntryDialog extends StatefulWidget {
   @override
@@ -40,10 +41,14 @@ class _BarcodeEntryDialogState extends State<BarcodeEntryDialog> {
         ),
         MaterialButton(
           child: Text('OK'),
-          onPressed: () {
-            if (_formKey.currentState!.validate()) {
-              _inventoryController.addProduct(barcodeController.text);
+          onPressed: () async {
+            if (barcodeController.text != "") {
+              print(barcodeController.text);
               Navigator.of(context).pop();
+              await _inventoryController.addProduct(barcodeController.text);
+            } else {
+              Get.snackbar("Error", "please enter barcode",
+                  backgroundColor: Colors.red, colorText: Colors.white);
             }
           },
         ),

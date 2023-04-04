@@ -12,10 +12,12 @@ class CatalogCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(children: [
-          CachedNetworkImage(
-            imageUrl: product.imageUrl,
-            placeholder: (context, url) => CircularProgressIndicator(),
-            errorWidget: (context, url, error) => Icon(Icons.error),
+          Expanded(
+            child: CachedNetworkImage(
+              imageUrl: product.imageUrl,
+              placeholder: (context, url) => CircularProgressIndicator(),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
           ),
           SizedBox(
             height: 20,

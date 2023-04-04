@@ -46,13 +46,28 @@ class HomeScreen extends StatelessWidget {
             ),
           );
         } else {
-          return ListView.builder(
-            itemCount: _inventoryController.products.length,
-            itemBuilder: (context, index) {
-              final product = _inventoryController.products[index];
-              return CatalogCard(product: product);
-            },
-          );
+          if (Theme.of(context).platform == TargetPlatform.android) {
+            return ListView.builder(
+              itemCount: _inventoryController.products.length,
+              itemBuilder: (context, index) {
+                final product = _inventoryController.products[index];
+                return CatalogCard(product: product);
+              },
+            );
+          } else {
+            return GridView.builder(
+              padding: EdgeInsets.zero,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3, // Set the number of columns here
+                childAspectRatio: 3 / 4, // Set the aspect ratio of the items
+              ),
+              itemCount: _inventoryController.products.length,
+              itemBuilder: (context, index) {
+                final product = _inventoryController.products[index];
+                return CatalogCard(product: product);
+              },
+            );
+          }
         }
       }),
     );
