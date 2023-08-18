@@ -60,10 +60,12 @@ class ProductListItem extends StatelessWidget {
           title: Text(
             product.name,
             style: TextStyle(
-              color: product.count == 0 ? Colors.red : null,
-            ),
+                color: product.count == 0 ? Colors.red : null,
+                fontSize: 20,
+                fontWeight: FontWeight.bold),
           ),
-          subtitle: Text('${product.count} in stock'),
+          subtitle: Text('${product.count} in stock',
+              style: TextStyle(fontWeight: FontWeight.bold)),
           trailing: IconButton(
             onPressed: () {
               Get.to(() => EditProductScreen(product: product));

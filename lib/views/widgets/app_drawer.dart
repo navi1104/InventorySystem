@@ -45,7 +45,7 @@ class AppDrawer extends StatelessWidget {
             leading: Icon(Icons.group),
             title: Text('Meet the Dev Team'),
             onTap: () {
-              Get.to(() => DevTeamScreen());
+              Get.to(() => DevProfilePage());
             },
           ),
           ListTile(
